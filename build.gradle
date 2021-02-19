@@ -59,12 +59,9 @@ buildscript {
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
         classpath "org.jetbrains.dokka:dokka-gradle-plugin:$dokka_version"
         classpath "org.jetbrains.kotlinx:atomicfu-gradle-plugin:$atomicfu_version"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
-        classpath "me.champeau.gradle:jmh-gradle-plugin:$jmh_plugin_version"
-        classpath "org.jetbrains.kotlinx:kotlinx.benchmark.gradle:$benchmarks_version"
         classpath "org.jetbrains.kotlinx:binary-compatibility-validator:$validator_version"
         classpath "com.android.tools.build:gradle:$android_gradle_version"
         classpath("org.jmailen.gradle:kotlinter-gradle:$ktlint_version")
@@ -196,7 +193,7 @@ allprojects {
             explicitApi()
         }
 
-        sourceSets.matching { !(it.name in ["jmh", "main", "test"]) }.all {
+        sourceSets.matching { !(it.name in ["main", "test"]) }.all {
             def srcDir = name.endsWith("Main") ? "src" : "test"
             def resourcesPrefix = name.endsWith("Test") ? "test-" : ""
             def platform = name[0..-5]
