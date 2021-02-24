@@ -5,6 +5,7 @@
 package io.ktor.client.engine.java
 
 import io.ktor.client.*
+import io.ktor.client.call.*
 import io.ktor.client.request.*
 import kotlinx.coroutines.*
 import kotlin.test.*
@@ -30,7 +31,7 @@ class JavaEngineTests {
         try {
             repeat(repeats) {
                 HttpClient(Java).use { client ->
-                    val response = client.get<String>("http://www.google.com")
+                    val response = client.get("http://www.google.com").body<String>()
                     assertNotNull(response)
                 }
             }
@@ -61,7 +62,7 @@ class JavaEngineTests {
                 .close()
 
             HttpClient(Java).use { client ->
-                val response = client.get<String>("http://www.google.com")
+                val response = client.get("http://www.google.com").body<String>()
                 assertNotNull(response)
             }
         }
@@ -75,7 +76,7 @@ class JavaEngineTests {
 
             HttpClient(Java).use { client ->
                 repeat(3) {
-                    val response = client.get<String>("http://www.google.com")
+                    val response = client.get("http://www.google.com").body<String>()
                     assertNotNull(response)
                 }
             }
